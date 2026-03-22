@@ -1,0 +1,19 @@
+import express from 'express';
+import dotenv from 'dotenv';
+dotenv.config();
+import connectDB from './configs/db';
+const app = express();
+app.use(express.json());
+connectDB();
+const port = process.env.PORT;
+import userRoutes from './routes/auth.routes';
+import friendRqstRoutes from './routes/friendRqst.routes';
+import conversationRoutes from './routes/conversations.routes';
+import globalError from './middlewares/globalError';
+app.use('/auth', userRoutes);
+app.use('/friends', friendRqstRoutes);
+app.use('/conversations', conversationRoutes);
+app.use(globalError);
+app.listen(port , async() => { 
+console.log(`Server running on port ${port}`);
+});
