@@ -5,8 +5,8 @@ export default function Registrationform (){
     return(
 <div className=" mx-auto flex justify-center items-center h-screen w-full  oklch(91% 0.096 180.426) "> 
         <div className= "w-full max-w-md rounded-2xl   mx-auto  border   border-gray-500" >
-      <h2 className="font-bold  mt-2  text-3xl p-1 m-1 ml-5 flex justify-center  ">Create your account </h2>
-      <p className="mx-auto p-2  flex justify-center text-sm ms:text-base ">Enter your details below to get started with your new account </p>
+      <h2 className="font-bold  mt-2  text-3xl p-1 m-1 ml-5 flex justify-center  ">Sign Up </h2>
+     
 
 <div className="mt-4 ">
 <label className="ml-4 mt-4 text-2xl  pl-1">Full name</label> <br />

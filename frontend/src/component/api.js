@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_KEY = "AIzaSyAZGFWYiSaaLLW9kg1ccVqQOewCSjdNH8g"
+const API_KEY = "AIzaSyDhTadM1Ylwd-5BhIAdjLxBJsO5LYZLSFU"
 
 export const sendMessageToAI  = async(msg)=>{
     try{
