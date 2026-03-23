@@ -6,11 +6,6 @@
 
   function App() {
 const [selectedUser, setSelectedUser] = useState(null);  
-  // const user = {
-  //     name: "Ravi Yadav",
-  //     avatar: "https://i.pravatar.cc/100",
-  //     status: "online"          
-  //   } 
 
     return (
       <div className="flex h-screen">
