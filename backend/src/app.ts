@@ -9,7 +9,7 @@ import SocketServer from "./ws/socketServer";
 const app = express();
 app.use(express.json());
 app.use(cors({
-	origin:"http://localhost:5173",
+	origin:process.env.F_PORT,
 	methods:["GET","POST","PUT","UPDATE","DELETE"],
 	allowedHeaders:["Content-Type","Authorization"],
 	credentials:true
