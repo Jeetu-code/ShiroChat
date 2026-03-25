@@ -5,7 +5,7 @@ const API_KEY = "AIzaSyDhTadM1Ylwd-5BhIAdjLxBJsO5LYZLSFU"
 export const sendMessageToAI  = async(msg)=>{
     try{
 
-        const res = await axios.post(       `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,{
+        const res = await axios.post(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${API_KEY}`,{
             contents:[{parts:[{text:msg}]}],
         }
     );

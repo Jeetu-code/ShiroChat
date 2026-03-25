@@ -2,6 +2,7 @@ import {catchAsync} from '../utils/catchAsync';
 import {userSignup, userSignin} from '../services/auth.services';
 export const signup = catchAsync(async(req, res)=> { 
 const data = req.body;
+console.log(req.body);
 if(!data){ 
 return res.status(401).json({message:"Name, email, password all required"});
 }
