@@ -1,8 +1,16 @@
-  import React from "react";
-  import { Search, Settings } from "lucide-react";
+  import React, { useState } from "react";
+  import { Search, Settings ,MessageSquarePlus } from "lucide-react";
   import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+import Actionmenu from "./Actionmenu";
+
+
+
 
   export default function Sidebar({ onSelectUser }) {
+
+    const [openmenu, setopenmenu] = useState(false);
+    
 
     const users = [
       {id:0 , name: "Ai chat", avatar:"https://i.pravatar.cc/150?img=5", isAI: true },
@@ -12,14 +20,19 @@
       { id: 4, name: "jyoti", avatar: "https://i.pravatar.cc/150?img=4" },
     ];
 
+
     return (
-      <div className="w-100 h-screen bg-white/60">
+      <div className="w-120 h-screen relative   bg-white/60">
 
         {/* Header */}
         <div className="flex items-center justify-between mb-5 p-4">
           <h1 className="font-bold text-lg">Messages</h1>
 
           <div className="flex items-center gap-5">
+      <MessageSquarePlus
+      onClick={()=>setopenmenu(!openmenu)}
+      className="w-5 hover:bg-slate-100 cursor-pointer h-5"/>
+      {openmenu && <Actionmenu setopenmenu={setopenmenu}/>}
             <Settings className="w-5 h-5" />
           </div>
         </div>

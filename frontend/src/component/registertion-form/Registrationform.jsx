@@ -1,35 +1,63 @@
 
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Success from "./Success";
+import { Phone } from "lucide-react";
+
 export default function Registrationform (){
 
+  const[name , setname] = useState("")
+  const [email ,setemail] = useState("")
   const [password , setpassword] = useState("");
   const [confirmpassword , setconfirmpassword] = useState("");
   const[Message , setMessage] = useState("");
   const[number , setnumber] = useState("")
-  const[error , seterror] = useState("")
+  const[error , seterror] = useState(false)
+
+
+  // show create account message
+  // const[showToast , setshowtoast] = useState("")
+
+
+  const navigate = useNavigate();
+
 
 const handlepassword = (e)=>{
 e.preventDefault();    // preventDefault to use page is not reload 
 let haserror = false;
 
-   if(number.length !== 10){
-seterror("❌ phone number must be 10 digits");
+if (!name || !email || !number || !password ) {
+  alert("fill all the details carefully")
+  return
+}
+  
+  if(number.length !== 10){
+seterror("phone number must be 10 digits");
 haserror = true;
    }else{
-    seterror("")
+    seterror("")    
    }
  //  Password validation
-  if (password !== confirmpassword) {
-    setMessage("❌ Password not match");
+ if (password.length < 6) {
+  setMessage("Password must be at least 6 digit ");
+  haserror = true
+ }
+  
+ else if(password !== confirmpassword) {
+    setMessage("Password not match");
     haserror = true;
   }else{
     setMessage("")
   }
+
    // ✅ Success
  if (!haserror) {
-    setMessage("✅ Account created successfully");
+   navigate("/Success");
   }
+  
 }
+
+
 
     return(
 <div className=" mx-auto flex justify-center items-center h-screen w-full  oklch(91% 0.096 180.426) "> 
@@ -40,14 +68,14 @@ haserror = true;
 <div className="mt-4 ">
 <label className="ml-4 mt-4 text-2xl  pl-1">Full name</label> <br />
 <div className="px-5">
-<input type="text" name="" id="" placeholder="jhon Doe" className=" border-black  shadow-md rounded-2xl mt-2 pl-5 py-4 w-full text-md " /> 
+<input onChange={(e)=>{setname(e.target.value)}} type="text" name="" id="" placeholder="jhon Doe" className=" border-black  shadow-md rounded-2xl mt-2 pl-5 py-4 w-full text-md " /> 
   </div>
 </div>
 
 <div className="mt-4">
 <label className="ml-4 m-5 text-2xl">Email Address</label> <br />
 <div className="px-4">
-<input type="text" name="" id="" placeholder="john@example.com" className=" border-black  shadow-md
+<input onChange={(e)=>{setemail(e.target.value)}} type="text" name="" id="" placeholder="john@example.com" className=" border-black  shadow-md
   rounded-2xl mt-2 pl-5 py-4 w-full  " /> 
   </div>
   </div>
@@ -55,7 +83,7 @@ haserror = true;
 <div className="mt-4">
 <label className="ml-4 mt-4 text-2xl">Phone Number</label> 
 <div className="px-5">
-<input type="text" name="" id="" placeholder="+91 (555) 000-000" onChange={(e)=> setnumber(e.target.value)} className=" border-black shadow-md rounded-2xl mt-2 pl-5 py-4 w-full " />
+<input  type="text" name="" id="" placeholder="+91 (555) 000-000" onChange={(e)=> setnumber(e.target.value)} className=" border-black shadow-md rounded-2xl mt-2 pl-5 py-4 w-full " />
   </div>
   </div>
 
@@ -79,6 +107,7 @@ haserror = true;
   </div>
  </div>  
  
+
  <div className="flex justify-center mt-6">
  <button onClick={handlepassword}  className=" bg-sky-400 border border-black rounded-2xl  oklch(86.5% 0.127 207.078) w-80 md:w-100 justify-center  p-2  py-4 font-bold text-white  active:scale-95 transition  ">Create Account</button>  
  </div>
@@ -94,7 +123,7 @@ haserror = true;
  </div>
 
 <div className="flex flex-row justify-center  mt-8 ">
- <p>Already have an account?</p> <p className="text-blue-400 ">sign in</p>
+ <p>Already have an account?</p> <p className="text-blue-400  cursor-pointer ">sign in</p>
 </div>
 
         </div>
