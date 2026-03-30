@@ -1,5 +1,8 @@
 
 import React,{useEffect,useState} from "react";
+import { useNavigate } from "react-router-dom";
+
+
 
 export default function Registrationform (){
 const [name,setName] = useState("");
@@ -23,9 +26,9 @@ setPress(!press);
   }
 }
 
-  const[name , setname] = useState("")
-  const [email ,setemail] = useState("")
-  const [password , setpassword] = useState("");
+  // const[name , setname] = useState("")
+  // const [email ,setemail] = useState("")
+  // const [password , setpassword] = useState("");
   const [confirmpassword , setconfirmpassword] = useState("");
   const[Message , setMessage] = useState("");
   const[number , setnumber] = useState("")
