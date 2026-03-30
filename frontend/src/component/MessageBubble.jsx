@@ -4,8 +4,8 @@ import { Check } from "lucide-react";
 
 export default function MessageBubble({message}){
    
-    const isSent = message.sender === "me"   //  अगर message मैंने भेजा → right side
-                                          //    अगर दूसरे ने भेजा → left side
+    const isSent = message.sender === "me"   //   if message send user→ right side
+                                          //    if message send by receiver → left side
     return (
         
             <motion.div 

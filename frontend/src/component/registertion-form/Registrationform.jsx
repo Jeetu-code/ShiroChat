@@ -23,6 +23,59 @@ setPress(!press);
   }
 }
 
+  const[name , setname] = useState("")
+  const [email ,setemail] = useState("")
+  const [password , setpassword] = useState("");
+  const [confirmpassword , setconfirmpassword] = useState("");
+  const[Message , setMessage] = useState("");
+  const[number , setnumber] = useState("")
+  const[error , seterror] = useState(false)
+
+
+  // show create account message
+  // const[showToast , setshowtoast] = useState("")
+
+
+  const navigate = useNavigate();
+
+
+const handlepassword = (e)=>{
+e.preventDefault();    // preventDefault to use page is not reload 
+let haserror = false;
+
+if (!name || !email || !number || !password ) {
+  alert("fill all the details carefully")
+  return
+}
+  
+  if(number.length !== 10){
+seterror("phone number must be 10 digits");
+haserror = true;
+   }else{
+    seterror("")    
+   }
+ //  Password validation
+ if (password.length < 6) {
+  setMessage("Password must be at least 6 digit ");
+  haserror = true
+ }
+  
+ else if(password !== confirmpassword) {
+    setMessage("Password not match");
+    haserror = true;
+  }else{
+    setMessage("")
+  }
+
+   // ✅ Success
+ if (!haserror) {
+   navigate("/Success");
+  }
+  
+}
+
+
+
     return(
 <div className=" mx-auto flex justify-center items-center h-screen w-full  oklch(91% 0.096 180.426) "> 
         <div className= "w-full max-w-md rounded-2xl   mx-auto  border   border-gray-500" >
@@ -60,7 +113,7 @@ setPress(!press);
 
 <div>
 <label className="ml-4 mt-4 text-2xl">confirm</label> <br />
-<input type="password" name="" id="" placeholder="confirm" className=" shadow-md border-black  rounded-2xl m-2 p-2 md:p-3 w-35 md:w-50 " />
+<input type="password" name="" id="" placeholder="confirm" onChange={(e)=>setconfirmpassword(e.target.value)} className=" shadow-md border-black  rounded-2xl m-2 p-2 md:p-3 w-35 md:w-50 " />
   </div>
   </div> 
 
@@ -71,12 +124,13 @@ setPress(!press);
   </div>
  </div>  
  
+
  <div className="flex justify-center mt-6">
  <button onClick={onhandlePress} className=" bg-sky-400 border border-black rounded-2xl  oklch(86.5% 0.127 207.078) w-80 md:w-100 justify-center  p-2  py-4 font-bold text-white   ">Create Account</button>  
  </div>
 
-<div className="flex flex-row justify-center  mt-10 ">
- <p>Already have an account?</p> <p className="text-blue-400 ">sign in</p>
+<div className="flex flex-row justify-center  mt-8 ">
+ <p>Already have an account?</p> <p className="text-blue-400  cursor-pointer ">sign in</p>
 </div>
 
         </div>
