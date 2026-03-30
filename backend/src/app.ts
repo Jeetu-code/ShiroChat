@@ -1,12 +1,25 @@
 import express from 'express';
-import jwt from "jsonwebtoken";
+import http from "http";
 import dotenv from 'dotenv';
 dotenv.config();
 import connectDB from './configs/db';
+import cors from "cors";
+import WebSocket from "ws";
+import SocketServer from "./ws/socketServer";
 const app = express();
 app.use(express.json());
-connectDB();
-const port = process.env.PORT;
+app.use(cors({
+	origin:process.env.F_PORT || "*",
+	methods:["GET","POST","PUT","UPDATE","DELETE"],
+	allowedHeaders:["Content-Type","Authorization"],
+	credentials:true
+}));
+const port = process.env.PORT || 3000;
+const server = http.createServer(app);
+const wss = new WebSocket.Server({server});
+
+SocketServer(wss);
+
 import userRoutes from './routes/auth.routes';
 import friendRqstRoutes from './routes/friendRqst.routes';
 import conversationRoutes from './routes/conversations.routes';
@@ -15,6 +28,20 @@ app.use('/auth', userRoutes);
 app.use('/friends', friendRqstRoutes);
 app.use('/conversations', conversationRoutes);
 app.use(globalError);
-app.listen(port , async() => { 
-console.log(`Server running on port ${port}`);
-});
+
+const startServer = async () => {
+  try {
+    await connectDB(); // ensure DB connects first
+
+    server.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
+
+  } catch (err) {
+    console.error("Startup error:", err);
+    process.exit(1); // crash properly with logs
+  }
+};
+
+startServer();
+

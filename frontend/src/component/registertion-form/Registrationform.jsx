@@ -1,10 +1,27 @@
 
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Success from "./Success";
-import { Phone } from "lucide-react";
+import React,{useEffect,useState} from "react";
 
 export default function Registrationform (){
+const [name,setName] = useState("");
+const [email,setEmail] = useState("");
+const [password,setPassword] = useState("");
+const [phone,setPhone] = useState("");
+const [press,setPress] =useState(false);
+const mobile = parseInt(phone);
+async function onhandlePress() {
+setPress(!press);
+  try {
+    const response = await fetch("http://localhost:3000/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password, mobile })
+    });
+    const result = await response.json();
+    console.log(result);
+  } catch (err) {
+    console.log("Error:", err);
+  }
+}
 
   const[name , setname] = useState("")
   const [email ,setemail] = useState("")
@@ -68,14 +85,14 @@ haserror = true;
 <div className="mt-4 ">
 <label className="ml-4 mt-4 text-2xl  pl-1">Full name</label> <br />
 <div className="px-5">
-<input onChange={(e)=>{setname(e.target.value)}} type="text" name="" id="" placeholder="jhon Doe" className=" border-black  shadow-md rounded-2xl mt-2 pl-5 py-4 w-full text-md " /> 
+<input type="text" value={name} onChange={(e)=>setName(e.target.value)} id="" placeholder="jhon Doe" className=" border-black  shadow-md rounded-2xl mt-2 pl-5 py-4 w-full text-md " /> 
   </div>
 </div>
 
 <div className="mt-4">
 <label className="ml-4 m-5 text-2xl">Email Address</label> <br />
 <div className="px-4">
-<input onChange={(e)=>{setemail(e.target.value)}} type="text" name="" id="" placeholder="john@example.com" className=" border-black  shadow-md
+<input type="text" name="email" value={email} onChange={(e)=>setEmail(e.target.value)} id="" placeholder="john@example.com" className=" border-black  shadow-md
   rounded-2xl mt-2 pl-5 py-4 w-full  " /> 
   </div>
   </div>
@@ -83,7 +100,7 @@ haserror = true;
 <div className="mt-4">
 <label className="ml-4 mt-4 text-2xl">Phone Number</label> 
 <div className="px-5">
-<input  type="text" name="" id="" placeholder="+91 (555) 000-000" onChange={(e)=> setnumber(e.target.value)} className=" border-black shadow-md rounded-2xl mt-2 pl-5 py-4 w-full " />
+<input type="text" name="phone" value={phone} onChange={(e)=>setPhone(e.target.value)} id="" placeholder="+91 (555) 000-000" className=" border-black shadow-md rounded-2xl mt-2 pl-5 py-4 w-full " />
   </div>
   </div>
 
@@ -91,7 +108,7 @@ haserror = true;
  <div className="flex  gap-10 md:gap-0 md:justify-between flex-row  mb-1 mt-5 ">
     <div className="">
 <label className="ml-4 mt-4 text-2xl">Password</label> <br />
-<input type="password" name="" id="" placeholder="password" onChange={(e)=>setpassword(e.target.value)} className="  border-black  shadow-md rounded-2xl m-2  p-2 md:p-3 w-35 md:w-50  "  />
+<input type="password" name="password" value={password} onChange={(e)=>setPassword(e.target.value)} id="" placeholder="password" className="  border-black  shadow-md rounded-2xl m-2  p-2 md:p-3 w-35 md:w-50 " />
   </div>
 
 <div>
@@ -109,17 +126,7 @@ haserror = true;
  
 
  <div className="flex justify-center mt-6">
- <button onClick={handlepassword}  className=" bg-sky-400 border border-black rounded-2xl  oklch(86.5% 0.127 207.078) w-80 md:w-100 justify-center  p-2  py-4 font-bold text-white  active:scale-95 transition  ">Create Account</button>  
- </div>
-
- {/* type message */}
- <div className="flex flex-col ">
-<div className="flex justify-center mt-4">
-  {error && <p className="text-red-500">{error}</p>}
-</div>
-<div className="flex justify-center">
-  {Message && <p className="text-red-500">{Message}</p>}
-</div>
+ <button onClick={onhandlePress} className=" bg-sky-400 border border-black rounded-2xl  oklch(86.5% 0.127 207.078) w-80 md:w-100 justify-center  p-2  py-4 font-bold text-white   ">Create Account</button>  
  </div>
 
 <div className="flex flex-row justify-center  mt-8 ">

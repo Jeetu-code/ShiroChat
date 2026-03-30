@@ -12,7 +12,6 @@ const data = {
 userId,
 recieverId
 };
-await userConversation(data);
 res.status(200).json({message:"Conversation created successfully"});
 }); 
 
