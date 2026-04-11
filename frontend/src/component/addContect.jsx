@@ -43,7 +43,7 @@ export default function AddContect ({setshowaddcontact}){
  <div className="mx-2">
 <p>phone</p>
 <motion.input
-placeholder="+91 (555) 000-000"
+placeholder=" (555) 000-000"
 className="border-b w-50  outline-none px-5 py-3 overflow-auto"
 >
 </motion.input>

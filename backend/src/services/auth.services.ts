@@ -7,7 +7,7 @@ name:string;
 email:string;
 password:string;
 mobile:number;
-};
+};             
 
 export const userSignup = async(data:signup_prop) => { 
 const existingUser = await User.findOne({email:data.email});
@@ -23,12 +23,13 @@ email:string;
 password:string;
 };
 
+
 export const userSignin = async(data:signin_prop) => { 
 const existingUser = await User.findOne({email:data.email});
 if(!existingUser){
 throw new AppError('User does not Exists, Signup first', 409);
 }
-const comparePasswd = comparePassword(data.password, existingUser.password);
+const comparePasswd = await comparePassword(data.password, existingUser.password);
 if(!comparePasswd){
 throw new AppError('wrong password', 409);
 }
