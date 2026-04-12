@@ -24,6 +24,7 @@ import Actionmenu from "./Actionmenu";
     return (
       <div className="w-120 h-screen relative   bg-white/60">
 
+
         {/* Header */}
         <div className="flex items-center justify-between mb-5 p-4">
           <h1 className="font-bold text-lg">Messages</h1>
