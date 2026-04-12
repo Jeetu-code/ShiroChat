@@ -24,13 +24,8 @@ export default function Signin(){
 <div className=" mx-auto flex justify-center items-center h-screen w-full  oklch(91% 0.096 180.426) "> 
         <div className= "w-full max-w-md rounded-2xl  h-110  mx-auto  border   border-gray-500" >
       <h2 className="font-bold  mt-2  text-3xl p-1 m-1 ml-5 flex justify-center  ">Sign in </h2>
-     
-<div className="mt-4 "> 
-<label className="ml-4 mt-4 text-2xl  pl-1">Full name</label> <br />
-<div className="px-5">
-<input onChange={(e)=> setname(e.target.value)} type="text" name="" id="" placeholder="jhon Doe" className=" border-black  shadow-md rounded-2xl mt-2 pl-5 py-4 w-full text-md " /> 
-  </div>
-</div>
+
+
 
 <div className="mt-4">
 <label className="ml-4 m-5 text-2xl">Email Address</label> <br />
@@ -40,6 +35,12 @@ export default function Signin(){
   </div>
   </div>
 
+<div className="mt-4 "> 
+<label className="ml-4 mt-4 text-2xl  pl-1">Password</label> <br />
+<div className="px-5">
+<input onChange={(e)=> setname(e.target.value)} type="text" name="" id="" placeholder="password" className=" border-black  shadow-md rounded-2xl mt-2 pl-5 py-4 w-full text-md " /> 
+  </div>
+</div>
 
 
  <div className="flex flex-row gap-2 mt-6 ">
@@ -55,8 +56,7 @@ export default function Signin(){
  </div>
 
 
-</div>
-            
+</div>      
         </div>
     )
 }
