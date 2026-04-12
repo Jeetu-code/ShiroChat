@@ -3,42 +3,20 @@ import { useNavigate } from "react-router-dom";
 
 export default function Signin(){
 
+  const[name , setname] = useState("");
   const[email , setgmail] = useState("")
-  const[password , setPassword] = useState("");
  
   const navigate = useNavigate();
  
- async function handlepassword(){
+ const handlepassword =()=>{
 
-
-   if( !email || ! password ){
+   if(!name || !email){
      alert("please fill all details")
      return ;
     }
-    
-    try{
-      const response = await fetch("http://localhost:3000/auth/signin",{
-        method : "POST",
-        headers : {"Content-Type" : "application/json" },
-        body : JSON.stringify({email , password})       
-      });
-      const result = await response.json()
-      console.log(result);
-      if(response.ok){
-        localStorage.setItem("token", result.token);  // setitem is a method of localstroage
-navigate("/chat")
-      }
-      else{
-        alert(result.message || "login failed")
-      }
-    }
-    catch(err){
-      console.log("Error",err) 
-  alert("server Error")
-}
+    navigate("/chat")
 
-} 
-
+  } 
 
     return (
 
@@ -47,7 +25,12 @@ navigate("/chat")
         <div className= "w-full max-w-md rounded-2xl  h-110  mx-auto  border   border-gray-500" >
       <h2 className="font-bold  mt-2  text-3xl p-1 m-1 ml-5 flex justify-center  ">Sign in </h2>
      
-
+<div className="mt-4 "> 
+<label className="ml-4 mt-4 text-2xl  pl-1">Full name</label> <br />
+<div className="px-5">
+<input onChange={(e)=> setname(e.target.value)} type="text" name="" id="" placeholder="jhon Doe" className=" border-black  shadow-md rounded-2xl mt-2 pl-5 py-4 w-full text-md " /> 
+  </div>
+</div>
 
 <div className="mt-4">
 <label className="ml-4 m-5 text-2xl">Email Address</label> <br />
@@ -57,12 +40,6 @@ navigate("/chat")
   </div>
   </div>
 
-<div className="mt-4 "> 
-<label className="ml-4 mt-4 text-2xl  pl-1">Password</label> <br />
-<div className="px-5">
-<input onChange={(e)=> setPassword(e.target.value)} value={password} type="password" placeholder="Password" className=" border-black  shadow-md rounded-2xl mt-2 pl-5 py-4 w-full text-md " /> 
-  </div>
-</div>
 
 
  <div className="flex flex-row gap-2 mt-6 ">

@@ -1,9 +1,9 @@
-
+import React, { use } from "react";
 import { CircleCheck } from "lucide-react";
 import { motion, spring } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 export default function Success(){
-        
+    
 
     const navigate = useNavigate()
 

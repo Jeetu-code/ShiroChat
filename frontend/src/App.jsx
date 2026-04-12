@@ -10,7 +10,6 @@ import {BrowserRouter , Routes , Route} from "react-router-dom"
 import Signin from "./component/registertion-form/signin";
 import Actionmenu from "./component/Actionmenu";
 import Success  from "./component/registertion-form/Success";// import { LogIn } from "lucide-react";   
-import AddContect from "./component/addContect";
 
 function LandingPage() {
   return (
@@ -62,7 +61,6 @@ function App() {
 
         <Route path = "sidebar" element={<Actionmenu/>}/>
         <Route path ="actionmenu" element={<Sidebar/>}/>
-        <Route path="addContect" element={<AddContect/>}/>
         
       </Routes>
     </BrowserRouter>
