@@ -112,7 +112,7 @@ haserror = true;
   </div> 
 
  <div className="flex flex-row gap-2 mt-2 justify-center ">
-  <input type="checkbox" className="size-6 rounded-2xl ml-4 border border-black outline-none" /> 
+  <input type="checkbox" className="size-6 rounded-xl ml-4 border border-black outline-none" /> 
   <div className="md:flex md:flex-row  gap-1 md:gap-2 text-sm  flex ">
   i agree to the <p className="text-blue-400"> Tearm of service </p> and <p className="text-blue-400"> Privacy Policy</p> 
   </div>
