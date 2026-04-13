@@ -1,5 +1,5 @@
 
-  import React,{useEffect,useState} from "react";
+  import React,{useState} from "react";
   // import { useNavigate } from "react-router-dom";
   import Success from "./Success";
 
@@ -83,8 +83,8 @@ setPress(!press);
   <label className="ml-4 mt-4 text-2xl  pl-1">Full name</label> <br />
   <div className="px-5">
   <input type="text" value={name} onChange={(e)=>setName(e.target.value)} id="" placeholder="jhon Doe" className=" border-black  shadow-md rounded-2xl mt-2 pl-5 py-4 w-full text-md " /> 
-    </div>
-  </div>
+    </div>    
+  </div>     
 
   <div className="mt-4">
   <label className="ml-4 m-5 text-2xl">Email Address</label> <br />
