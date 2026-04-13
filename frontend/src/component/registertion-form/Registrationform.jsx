@@ -62,17 +62,21 @@ export default function Registrationform() {
     return <Success setsuccess={setsuccess} />;
   }
 
-  return (
-    <div className="mx-auto flex justify-center items-center h-screen w-full bg-gradient-to-b from-white to-slate-200">
-      <div className="w-full bg-white max-w-lg rounded-3xl shadow-2xl mx-auto border border-slate-100">
+  return(
+<div className=" mx-auto flex justify-center items-center h-screen w-full  bg-gradient-to-b from-white to-slate-200 "> 
+        <div className= "w-full bg-white/100   max-w-lg rounded-3xl  shadow-2xl   mx-auto  border   border-slate-100" >
+  <span className="  flex justify-center mt-15 md:mt-10 items-center  mx-auto overflow-hidden rounded-full relative h-20 w-20 sm:h-24 sm:w-24 shadow-lg  ring-white/50 transition-all duration-300 hover:shadow-xl">
+  <img
+    className="aspect-square justify-center items-center mx-auto h-full w-full object-cover"
+    alt="ChatSphere logo"
+    src="https://media.base44.com/images/public/69c13deea29e8ab638e043ee/08030db4e_logo.png"
+  />
+</span>
 
-        <h2 className="font-bold mt-5 text-3xl text-center">
-          Welcome to ShiroChat
-        </h2>
-        <h2 className="font-bold mt-2 text-xl text-center text-gray-400">
-          Sign up to continue
-        </h2>
-
+      <h2 className="font-bold  mt-5 text-3xl p-1 m-1 ml-5 flex justify-center  ">Welcome to shirochat
+         </h2>
+               <h2 className="  font-bold mt-2  text-xl p-1 m-1 ml-5 flex justify-center text-gray-300  ">Sign up to continue
+</h2>
         {/* Name */}
         <div className="mt-4 px-5">
           <input

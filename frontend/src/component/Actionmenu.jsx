@@ -22,7 +22,7 @@ if(showaddcontact){
     ];
 
     return(
-        <div className=" absolute inset-1  h-screen w-full z-50 bg-white">
+        <div className=" absolute inset-1  h-screen w-full z-50 bg-slate-100">
 
 
      <div className=" flex  flex-row justify-between mt-4 px-4">

@@ -22,13 +22,14 @@ import Actionmenu from "./Actionmenu";
 
 
     return (
-      <div className="w-120 h-screen relative   bg-white/60">
+      <div className="w-120 h-screen relative  bg-slate-100">
 
 
         {/* Header */}
         <div className="flex items-center justify-between mb-5 p-4">
-          <h1 className="font-bold text-lg">Messages</h1>
-
+<h1 className="text-3xl font-extrabold bg-gradient-to-r from-sky-500 to-blue-700 bg-clip-text text-transparent">
+  ShiroChat
+</h1>
           <div className="flex items-center gap-5">
       <MessageSquarePlus
       onClick={()=>setopenmenu(!openmenu)}

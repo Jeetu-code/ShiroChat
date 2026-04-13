@@ -5,7 +5,7 @@ import { ArrowLeft  , Phone} from "lucide-react";
 export default function AddContect ({setshowaddcontact}){
     return (
 
-    <div className=" absolute inset-0   w-full p-4  z-50 px-2 bg-white py-3 ">
+    <div className=" absolute inset-0   w-full p-4  z-50 px-2 bg-slate-100 py-3 ">
 
 {/*  back arrow */}
  <div className="flex gap-3 items-center ">
