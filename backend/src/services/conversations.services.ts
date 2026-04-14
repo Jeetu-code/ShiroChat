@@ -7,8 +7,14 @@ userId:Types.ObjectId;
 recieverId:Types.ObjectId;
 message:string;
 };
+
+type userprop = {
+userId:Types.ObjectId;
+receiverId:Types.ObjectId;
+}
 export const userConversation = async(data:userConversation_props) => { 
 const existing = await conversation.findOne({members:{$all:[data.userId , data.recieverId]}});
+console.log(existing,"from conv search convid");
 if(!existing){ 
 const membersId=await conversation.create({members:[data.userId, data.recieverId]});
 console.log(membersId);
@@ -26,6 +32,18 @@ const user = await conversation.find({members:userId}).populate("members" , "nam
 if(!user){
 throw new Error("Unauthorized");
 }
-const chat = await Message.find({conversationId:user[0]._id});
-return chat;
+return user;
 };
+
+export const getAllMessages = async(ConvId:string)=>{
+const msgs = await Message.find({conversationId:ConvId});
+console.log(msgs,"all msgs form services");
+return msgs;
+}
+export const getConvId = async(data:userprop)=>{
+const existing = await conversation.findOne({members:{$all:[data.userId,data.receiverId]}});
+if(!existing){
+throw new Error("Conversation not found!");
+}
+return existing;
+}

@@ -4,7 +4,6 @@ import {verifyToken, AuthPayload} from '../utils/jwt';
 export const auth = async(req:Request, res:Response, next:NextFunction) => { 
 try{ 
 const tokenHead = req.headers?.authorization; 
-console.log(tokenHead,"hererere");
 if(!tokenHead || !tokenHead.startsWith('Bearer')){ 
 throw new AppError("invalid token", 401); 
 }

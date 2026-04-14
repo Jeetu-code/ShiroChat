@@ -39,7 +39,7 @@ socket.on("message", async (data) => {
     socket.send(JSON.stringify({ error: "Invalid JSON" }));
     return;
   }
-
+console.log(parsed,"from handleChat 1");
   if(parsed.type === "chat"){
     if(!socket.user) return;
 
@@ -48,10 +48,11 @@ socket.on("message", async (data) => {
     const senderId = socket.user.userId;
     const receiversId = parsed.id;
 
+console.log(parsed,receiversEmail,"from handleChat 2");
     await userConversation({
       userId: new mongoose.Types.ObjectId(senderId),
       recieverId: new mongoose.Types.ObjectId(receiversId),
-      message: parsed.message
+      message: parsed.message,
     });
 
     const payload = {
