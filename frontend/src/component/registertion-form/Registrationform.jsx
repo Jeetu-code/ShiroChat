@@ -1,140 +1,155 @@
+import React, { useState } from "react";
+import Success from "./Success";
 
-import React,{useEffect,useState} from "react";
+export default function Registrationform() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [confirmpassword, setconfirmpassword] = useState("");
+  const [error, seterror] = useState("");
+  const [Message, setMessage] = useState("");
+  const [success, setsuccess] = useState(false);
 
-export default function Registrationform (){
-const [name,setName] = useState("");
-const [email,setEmail] = useState("");
-const [password,setPassword] = useState("");
-const [phone,setPhone] = useState("");
-const [press,setPress] =useState(false);
-const mobile = parseInt(phone);
-async function onhandlePress() {
-setPress(!press);
-  try {
-    const response = await fetch("http://localhost:3000/auth/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password, mobile })
-    });
-    const result = await response.json();
-    console.log(result);
-  } catch (err) {
-    console.log("Error:", err);
-  }
-}
+  const mobile = parseInt(phone);
 
-  const[name , setname] = useState("")
-  const [email ,setemail] = useState("")
-  const [password , setpassword] = useState("");
-  const [confirmpassword , setconfirmpassword] = useState("");
-  const[Message , setMessage] = useState("");
-  const[number , setnumber] = useState("")
-  const[error , seterror] = useState(false)
+  async function onhandlePress(e) {
+    e.preventDefault();
 
+    let haserror = false;
 
-  // show create account message
-  // const[showToast , setshowtoast] = useState("")
+    if (!name || !email || !phone || !password) {
+      alert("fill all the details carefully");
+      return;
+    }
 
+    if (phone.length !== 10) {
+      seterror("phone number must be 10 digits");
+      haserror = true;
+    } else {
+      seterror("");
+    }
 
-  const navigate = useNavigate();
+    if (password.length < 6) {
+      setMessage("Password must be at least 6 digit ");
+      haserror = true;
+    } else if (password !== confirmpassword) {
+      setMessage("Password not match");
+      haserror = true;
+    } else {
+      setMessage("");
+    }
 
+    if (haserror) return;
 
-const handlepassword = (e)=>{
-e.preventDefault();    // preventDefault to use page is not reload 
-let haserror = false;
+    try {
+      const response = await fetch("http://localhost:3000/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, password, mobile }),
+      });
 
-if (!name || !email || !number || !password ) {
-  alert("fill all the details carefully")
-  return
-}
-  
-  if(number.length !== 10){
-seterror("phone number must be 10 digits");
-haserror = true;
-   }else{
-    seterror("")    
-   }
- //  Password validation
- if (password.length < 6) {
-  setMessage("Password must be at least 6 digit ");
-  haserror = true
- }
-  
- else if(password !== confirmpassword) {
-    setMessage("Password not match");
-    haserror = true;
-  }else{
-    setMessage("")
+      const result = await response.json();
+      console.log(result);
+      setsuccess(true);
+    } catch (err) {
+      console.log("Error:", err);
+      alert("server error");
+    }
   }
 
-   // ✅ Success
- if (!haserror) {
-   navigate("/Success");
+  if (success) {
+    return <Success setsuccess={setsuccess} />;
   }
-  
-}
 
+  return(
+<div className=" mx-auto flex justify-center items-center h-screen w-full  bg-gradient-to-b from-white to-slate-200 "> 
+        <div className= "w-full bg-white/100   max-w-lg rounded-3xl  shadow-2xl   mx-auto  border   border-slate-100" >
+  <span className="  flex justify-center mt-15 md:mt-10 items-center  mx-auto overflow-hidden rounded-full relative h-20 w-20 sm:h-24 sm:w-24 shadow-lg  ring-white/50 transition-all duration-300 hover:shadow-xl">
+  <img
+    className="aspect-square justify-center items-center mx-auto h-full w-full object-cover"
+    alt="ChatSphere logo"
+    src="https://media.base44.com/images/public/69c13deea29e8ab638e043ee/08030db4e_logo.png"
+  />
+</span>
 
-
-    return(
-<div className=" mx-auto flex justify-center items-center h-screen w-full  oklch(91% 0.096 180.426) "> 
-        <div className= "w-full max-w-md rounded-2xl   mx-auto  border   border-gray-500" >
-      <h2 className="font-bold  mt-2  text-3xl p-1 m-1 ml-5 flex justify-center  ">Sign Up </h2>
-     
-
-<div className="mt-4 ">
-<label className="ml-4 mt-4 text-2xl  pl-1">Full name</label> <br />
-<div className="px-5">
-<input type="text" value={name} onChange={(e)=>setName(e.target.value)} id="" placeholder="jhon Doe" className=" border-black  shadow-md rounded-2xl mt-2 pl-5 py-4 w-full text-md " /> 
-  </div>
-</div>
-
-<div className="mt-4">
-<label className="ml-4 m-5 text-2xl">Email Address</label> <br />
-<div className="px-4">
-<input type="text" name="email" value={email} onChange={(e)=>setEmail(e.target.value)} id="" placeholder="john@example.com" className=" border-black  shadow-md
-  rounded-2xl mt-2 pl-5 py-4 w-full  " /> 
-  </div>
-  </div>
-
-<div className="mt-4">
-<label className="ml-4 mt-4 text-2xl">Phone Number</label> 
-<div className="px-5">
-<input type="text" name="phone" value={phone} onChange={(e)=>setPhone(e.target.value)} id="" placeholder="+91 (555) 000-000" className=" border-black shadow-md rounded-2xl mt-2 pl-5 py-4 w-full " />
-  </div>
-  </div>
-
-
- <div className="flex  gap-10 md:gap-0 md:justify-between flex-row  mb-1 mt-5 ">
-    <div className="">
-<label className="ml-4 mt-4 text-2xl">Password</label> <br />
-<input type="password" name="password" value={password} onChange={(e)=>setPassword(e.target.value)} id="" placeholder="password" className="  border-black  shadow-md rounded-2xl m-2  p-2 md:p-3 w-35 md:w-50 " />
-  </div>
-
-<div>
-<label className="ml-4 mt-4 text-2xl">confirm</label> <br />
-<input type="password" name="" id="" placeholder="confirm" onChange={(e)=>setconfirmpassword(e.target.value)} className=" shadow-md border-black  rounded-2xl m-2 p-2 md:p-3 w-35 md:w-50 " />
-  </div>
-  </div> 
-
- <div className="flex flex-row gap-2 mt-2 ">
-  <input type="checkbox" className="size-6 rounded-2xl ml-4 border border-black" /> 
-  <div className="md:flex md:flex-row  gap-1 md:gap-2 text-sm  flex ">
-  i agree to the <p className="text-blue-400"> Tearm of service </p> and <p className="text-blue-400"> Privacy Policy</p> 
-  </div>
- </div>  
- 
-
- <div className="flex justify-center mt-6">
- <button onClick={onhandlePress} className=" bg-sky-400 border border-black rounded-2xl  oklch(86.5% 0.127 207.078) w-80 md:w-100 justify-center  p-2  py-4 font-bold text-white   ">Create Account</button>  
- </div>
-
-<div className="flex flex-row justify-center  mt-8 ">
- <p>Already have an account?</p> <p className="text-blue-400  cursor-pointer ">sign in</p>
-</div>
-
+      <h2 className="font-bold  mt-5 text-3xl p-1 m-1 ml-5 flex justify-center  ">Welcome to shirochat
+         </h2>
+               <h2 className="  font-bold mt-2  text-xl p-1 m-1 ml-5 flex justify-center text-gray-300  ">Sign up to continue
+</h2>
+        {/* Name */}
+        <div className="mt-4 px-5">
+          <input
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            type="text"
+            placeholder="Full Name"
+            className="w-full p-3 rounded-xl shadow outline-none"
+          />
         </div>
-        </div>
-    )
 
+        {/* Email */}
+        <div className="mt-4 px-5">
+          <input
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Email"
+            className="w-full p-3 rounded-xl shadow outline-none"
+          />
+        </div>
+
+        {/* Phone */}
+        <div className="mt-4 px-5">
+          <input
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+            type="text"
+            placeholder="Phone"
+            className="w-full p-3 rounded-xl shadow outline-none"
+          />
+        </div>
+
+        {/* Password */}
+        <div className="flex gap-4 px-5 mt-4">
+          <input
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            type="password"
+            placeholder="Password"
+            className="w-full p-3 rounded-xl shadow outline-none"
+          />
+
+          <input
+            onChange={(e) => setconfirmpassword(e.target.value)}
+            type="password"
+            placeholder="Confirm"
+            className="w-full p-3 rounded-xl shadow outline-none"
+          />
+        </div>
+
+        {/* Errors */}
+        <div className="text-center mt-2">
+          {error && <p className="text-red-500">{error}</p>}
+          {Message && <p className="text-red-500">{Message}</p>}
+        </div>
+
+        {/* Button */}
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={onhandlePress}
+            className="bg-[#0f172a] text-white px-10 py-3 rounded-xl active:scale-95"
+          >
+            Create Account
+          </button>
+        </div>
+
+        <div className="text-center mt-4 mb-4">
+          Already have an account?{" "}
+          <span className="text-blue-400 cursor-pointer">Sign in</span>
+        </div>
+
+      </div>
+    </div>
+  );
 }

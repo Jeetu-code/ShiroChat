@@ -1,62 +1,100 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { PiSignInBold } from "react-icons/pi";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
-export default function Signin(){
 
-  const[name , setname] = useState("");
-  const[email , setgmail] = useState("")
- 
+export default function Signin() {
+  const [email, setgmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showpassword , setshowpassword] = useState(false)
+
   const navigate = useNavigate();
- 
- const handlepassword =()=>{
 
-   if(!name || !email){
-     alert("please fill all details")
-     return ;
+  async function handlepassword() {
+    if (!email || !password) {
+      alert("please fill all details");
+      return;
     }
-    navigate("/chat")
 
-  } 
+    try {
+      const response = await fetch("http://localhost:3000/auth/signin", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    return (
+      const result = await response.json();
+      console.log(result);
 
+      if (response.ok) {
+        localStorage.setItem("token", result.token);
+        navigate("/chat");
+      } else {
+        alert(result.message || "login failed");
+      }
+    } catch (err) {
+      console.log("Error", err);
+      alert("server Error");
+    }
+  }
 
-<div className=" mx-auto flex justify-center items-center h-screen w-full  oklch(91% 0.096 180.426) "> 
-        <div className= "w-full max-w-md rounded-2xl  h-110  mx-auto  border   border-gray-500" >
-      <h2 className="font-bold  mt-2  text-3xl p-1 m-1 ml-5 flex justify-center  ">Sign in </h2>
-     
-<div className="mt-4 "> 
-<label className="ml-4 mt-4 text-2xl  pl-1">Full name</label> <br />
-<div className="px-5">
-<input onChange={(e)=> setname(e.target.value)} type="text" name="" id="" placeholder="jhon Doe" className=" border-black  shadow-md rounded-2xl mt-2 pl-5 py-4 w-full text-md " /> 
-  </div>
-</div>
+  return (
+    <div className="mx-auto flex justify-center items-center h-screen w-full bg-gradient-to-b from-sky-700 via-blue-100  to-slate-50">
+      <div className="w-full max-w-md rounded-2xl h-120 mx-auto border border-transparent bg-gradient-to-b from-sky-200 to-white/90">
+        <div className="flex justify-center mt-5">
+ <div className="flex  bg-white rounded-2xl w-20 h-20  justify-center text-center items-center"><  PiSignInBold size={40} /></div>   </div>
+        <h2 className="font-bold mt-2 text-3xl text-center">Sign in
+           <span className="block w-16 h-1 bg-sky-400 mx-auto mt-2 rounded-full"></span>
+        </h2>
 
-<div className="mt-4">
-<label className="ml-4 m-5 text-2xl">Email Address</label> <br />
-<div className="px-4">
-<input onChange={(r)=>setgmail(r.target.value)} type="text" name="" id="" placeholder="john@example.com" className=" border-black  shadow-md
-  rounded-2xl mt-2 pl-5 py-4 w-full  " /> 
-  </div>
-  </div>
-
-
-
- <div className="flex flex-row gap-2 mt-6 ">
-  <input type="checkbox" className="size-6 rounded-2xl ml-4 border border-black" /> 
-  <div className="md:flex md:flex-row  gap-1 md:gap-2 text-sm  flex ">
-  i agree to the <p className="text-blue-400"> Tearm of service </p> and <p className="text-blue-400"> Privacy Policy</p> 
-  </div>
- </div>  
-
-
- <div className="flex justify-center mt-6">
- <button onClick={()=> handlepassword()} className=" bg-sky-400 border border-black rounded-2xl  oklch(86.5% 0.127 207.078) w-80 md:w-100 justify-center  p-2  py-4 font-bold text-white  active:scale-95 transition  ">Signin</button>  
- </div>
-
-
-</div>
-            
+        {/* Email */}
+        <div className="mt-4">
+          <div className="px-4">
+            <input
+              onChange={(e) => setgmail(e.target.value)}
+              type="text"
+              placeholder="john@example.com"
+              className="shadow-md rounded-2xl mt-2 pl-5 py-4 w-full outline-none"
+            />
+          </div>
         </div>
-    )
+
+        {/* Password */}
+        <div className="mt-4">
+          <div className=" relative px-5">
+            <input
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+              type={showpassword ? "text" : "password"}
+              placeholder="Password"
+              className="shadow-md rounded-2xl mt-2 pl-5 py-4 w-full outline-none"
+            />
+{/* // eye */}
+            <div className="absolute right-8 top-1/2 transform -translate-y-1/2 cursor-pointer"
+onClick={()=>setshowpassword(!showpassword)}>
+{showpassword? (<AiOutlineEye size={30}/>):
+(<AiOutlineEyeInvisible size={30}/>)}
+            </div>
+          </div>
+        </div>
+
+        {/* Button */}
+        <div className="flex justify-center mt-6">
+          <button
+            onClick={handlepassword}
+            className="bg-[#0f172a] font-bold text-white w-80 py-3 rounded-xl active:scale-95"
+          >
+            Get started
+          </button>
+        </div>
+        
+        <p className="text-center mt-4">
+  Don’t have an account? 
+  <span className="text-blue-400 cursor-pointer"> Sign up</span>
+</p>
+
+      </div>
+    </div>
+  );
 }

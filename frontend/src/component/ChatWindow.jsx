@@ -29,8 +29,7 @@ export default function ChatWindow({ user }) {
 
       <ChatHeader user={user} />
 
-      <div className="flex-1 bg-slate-100 p-4 overflow-y-auto">
-        {messages.map((msg, i) => (
+<div className="flex-1 bg-white/60 backdrop-blur-lg p-4 overflow-y-auto">     {messages.map((msg, i) => (
           <div
             key={i}
             className={`mb-2 ${

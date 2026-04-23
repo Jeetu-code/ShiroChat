@@ -19,7 +19,7 @@ const userSignin = async (data) => {
     if (!existingUser) {
         throw new AppError_1.AppError('User does not Exists, Signup first', 409);
     }
-    const comparePasswd = (0, bcrypt_1.comparePassword)(data.password, existingUser.password);
+    const comparePasswd = await (0, bcrypt_1.comparePassword)(data.password, existingUser.password);
     if (!comparePasswd) {
         throw new AppError_1.AppError('wrong password', 409);
     }
