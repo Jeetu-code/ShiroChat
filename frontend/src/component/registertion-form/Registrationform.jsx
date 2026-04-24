@@ -1,28 +1,12 @@
 
 import React,{useEffect,useState} from "react";
 
+import { useNavigate } from "react-router-dom";
+import Success from "./Success";
 export default function Registrationform (){
-const [name,setName] = useState("");
-const [email,setEmail] = useState("");
-const [password,setPassword] = useState("");
 const [phone,setPhone] = useState("");
 const [press,setPress] =useState(false);
 const mobile = parseInt(phone);
-async function onhandlePress() {
-setPress(!press);
-  try {
-    const response = await fetch("http://localhost:3000/auth/signup", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, password, mobile })
-    });
-    const result = await response.json();
-    console.log(result);
-  } catch (err) {
-    console.log("Error:", err);
-  }
-}
-
   const[name , setname] = useState("")
   const [email ,setemail] = useState("")
   const [password , setpassword] = useState("");
@@ -30,24 +14,24 @@ setPress(!press);
   const[Message , setMessage] = useState("");
   const[number , setnumber] = useState("")
   const[error , seterror] = useState(false)
+  const navigate = useNavigate();
 
 
   // show create account message
   // const[showToast , setshowtoast] = useState("")
 
 
-  const navigate = useNavigate();
 
 
 const handlepassword = (e)=>{
-e.preventDefault();    // preventDefault to use page is not reload 
+//e.preventDefault();    // preventDefault to use page is not reload 
 let haserror = false;
-
+/*
 if (!name || !email || !number || !password ) {
-  alert("fill all the details carefully")
-  return
+  alert("fill all the details carefully");
+  return;
 }
-  
+ */ 
   if(number.length !== 10){
 seterror("phone number must be 10 digits");
 haserror = true;
@@ -74,25 +58,46 @@ haserror = true;
   
 }
 
+async function onhandlePress() {
+console.log(press);
+setPress(!press);
+
+  try {
+    const response = await fetch("https://shirochat.onrender.com/auth/signup", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, password, mobile })
+    });
+    const result = await response.json();
+    console.log(result);
+  } catch (err) {
+    console.log("Error:", err);
+  }
+
+}
+
+
+
 
 
     return(
-<div className=" mx-auto flex justify-center items-center h-screen w-full  oklch(91% 0.096 180.426) "> 
-        <div className= "w-full max-w-md rounded-2xl   mx-auto  border   border-gray-500" >
+<><div className=" mx-auto bg-pink-50 flex justify-center items-center h-screen w-full  oklch(91% 0.096 180.426) ">
+ 
+        <div className= "w-full max-w-md rounded-2xl py-9 bg-white  mx-auto  shadow-2xl" >
       <h2 className="font-bold  mt-2  text-3xl p-1 m-1 ml-5 flex justify-center  ">Sign Up </h2>
      
 
 <div className="mt-4 ">
 <label className="ml-4 mt-4 text-2xl  pl-1">Full name</label> <br />
 <div className="px-5">
-<input type="text" value={name} onChange={(e)=>setName(e.target.value)} id="" placeholder="jhon Doe" className=" border-black  shadow-md rounded-2xl mt-2 pl-5 py-4 w-full text-md " /> 
+<input type="text" value={name} onChange={(e)=>setname(e.target.value)} id="" placeholder="jhon Doe" className=" border-black  shadow-md rounded-2xl mt-2 pl-5 py-4 w-full text-md " /> 
   </div>
 </div>
 
 <div className="mt-4">
 <label className="ml-4 m-5 text-2xl">Email Address</label> <br />
 <div className="px-4">
-<input type="text" name="email" value={email} onChange={(e)=>setEmail(e.target.value)} id="" placeholder="john@example.com" className=" border-black  shadow-md
+<input type="text" name="email" value={email} onChange={(e)=>setemail(e.target.value)} id="" placeholder="john@example.com" className=" border-black  shadow-md
   rounded-2xl mt-2 pl-5 py-4 w-full  " /> 
   </div>
   </div>
@@ -108,7 +113,7 @@ haserror = true;
  <div className="flex  gap-10 md:gap-0 md:justify-between flex-row  mb-1 mt-5 ">
     <div className="">
 <label className="ml-4 mt-4 text-2xl">Password</label> <br />
-<input type="password" name="password" value={password} onChange={(e)=>setPassword(e.target.value)} id="" placeholder="password" className="  border-black  shadow-md rounded-2xl m-2  p-2 md:p-3 w-35 md:w-50 " />
+<input type="password" name="password" value={password} onChange={(e)=>setpassword(e.target.value)} id="" placeholder="password" className="  border-black  shadow-md rounded-2xl m-2  p-2 md:p-3 w-35 md:w-50 " />
   </div>
 
 <div>
@@ -126,15 +131,17 @@ haserror = true;
  
 
  <div className="flex justify-center mt-6">
- <button onClick={onhandlePress} className=" bg-sky-400 border border-black rounded-2xl  oklch(86.5% 0.127 207.078) w-80 md:w-100 justify-center  p-2  py-4 font-bold text-white   ">Create Account</button>  
+ <button onClick={onhandlePress} className=" bg-sky-400  rounded-2xl  oklch(86.5% 0.127 207.078) w-80 md:w-100 justify-center  p-2  py-4 font-bold text-white   ">Create Account</button>  
  </div>
 
 <div className="flex flex-row justify-center  mt-8 ">
  <p>Already have an account?</p> <p className="text-blue-400  cursor-pointer ">sign in</p>
 </div>
+ </div>
+	    {press && (<Success/>)}
 
-        </div>
-        </div>
+</div>
+</>
     )
 
 }

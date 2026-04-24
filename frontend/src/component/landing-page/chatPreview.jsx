@@ -67,7 +67,7 @@ export default function Chatpreview(){
 </div>
 
 {/* message */}
-     <div className="bg-gradient-to-b from-secondary/30 to-white/50">
+     <div className="bg-linear-to-b from-secondary/30 to-white/50">
         {message.map((msg,index)=>(
             <MessageBubblePreview key={msg.id} msg={msg} index={index}/> 
         ))}

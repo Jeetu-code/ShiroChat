@@ -24,7 +24,7 @@ className="text-8xl font-bold flex flex-col  lg:justify-start ">
   <span>Connect </span>
   <span>  instantly  </span> 
     
-  <span className="bg-gradient-to-r from-purple-700 via-pink-400 to-indigo-500 bg-clip-text text-transparent   "> With anyone</span>  
+  <span className="bg-linear-to-r from-purple-700 via-pink-400 to-indigo-500 bg-clip-text text-transparent   "> With anyone</span>  
 </motion.h1>
 
 <motion.p
@@ -57,7 +57,7 @@ className="mt-6 max-w-md font-inter text-base text-gray-600 sm:text-lg leading-r
   whileHover={{ scale: 1.05 }}
   whileTap={{ scale: 0.95, rotate: 0.5, opacity: 0.9 }}
    onClick={()=>navigate("/signin")}
-  className="bg-white/70 rounded-2xl w-40 px-3 py-4 text-black font-bold font-semibold text-lg"
+  className="bg-white/70 rounded-2xl w-40 px-3 py-4 text-black  font-semibold text-lg"
 >
   sign in
 </motion.button>

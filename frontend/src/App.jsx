@@ -9,7 +9,8 @@ import Chatpreview from "./component/landing-page/chatPreview";
 import {BrowserRouter , Routes , Route} from "react-router-dom"
 import Signin from "./component/registertion-form/signin";
 import Actionmenu from "./component/Actionmenu";
-import Success  from "./component/registertion-form/Success";// import { LogIn } from "lucide-react";   
+import Success  from "./component/registertion-form/Success";
+// import { LogIn } from "lucide-react";   
 
 function LandingPage() {
   return (
